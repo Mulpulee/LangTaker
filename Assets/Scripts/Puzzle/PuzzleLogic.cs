@@ -9,11 +9,12 @@ public class PuzzleLogic : MonoBehaviour
     [SerializeField] private GameObject Player;             // p
     [SerializeField] private GameObject Monster;            // m
     [SerializeField] private GameObject Goal;               // g
+    [SerializeField] private GameObject Key;                // k
     [SerializeField] private GameObject EmptyTile;          // .
     [SerializeField] private GameObject WallTile;           // w
     [SerializeField] private GameObject BoxTile;            // b
+    [SerializeField] private GameObject LockedBoxTile;      // l
     [SerializeField] private GameObject SpikeTile;          // s
-    [SerializeField] private GameObject BoxOnSpikeTile;     // n
     [SerializeField] private GameObject OnOffSpikeTile;     // A / v
     [SerializeField] private GameObject SpecialSpikeTile;   // 1 - ??
 
@@ -28,6 +29,7 @@ public class PuzzleLogic : MonoBehaviour
 
     private GameObject m_player;
 
+    private List<GameObject> m_lockedBoxes;
     private int m_moveCount;
 
     public bool TurnChange = false;
@@ -47,6 +49,7 @@ public class PuzzleLogic : MonoBehaviour
 
         m_map = pMap.Puzzle;
         MapParent = new GameObject("Map");
+        m_lockedBoxes = new List<GameObject>();
 
         for(int i = 0; i < height; i++)
         {
@@ -76,6 +79,14 @@ public class PuzzleLogic : MonoBehaviour
                         SummonTile(EmptyTile, i, j, width, height);
                         SummonTile(BoxTile, i, j, width, height);
                         break;
+                    case 'k':
+                        SummonTile(EmptyTile, i, j, width, height);
+                        SummonTile(Key, i, j, width, height);
+                        break;
+                    case 'l':
+                        SummonTile(EmptyTile, i, j, width, height);
+                        m_lockedBoxes.Add(SummonTile(LockedBoxTile, i, j, width, height));
+                        break;
                     case 'm':
                         SummonTile(EmptyTile, i, j, width, height);
                         SummonTile(Monster, i, j, width, height);
@@ -88,7 +99,7 @@ public class PuzzleLogic : MonoBehaviour
                         SummonTile(EmptyTile, i, j, width, height);
                         m_player = SummonTile(Player, i, j, width, height);
                         break;
-                    case 'n':
+                    case 'n': // Box on Spike
                         SummonTile(EmptyTile, i, j, width, height);
                         SummonTile(SpikeTile, i, j, width, height);
                         SummonTile(BoxTile, i, j, width, height);
@@ -172,6 +183,13 @@ public class PuzzleLogic : MonoBehaviour
             {
                 Destroy(facing.gameObject);
             }
+        }
+        else if (facing.CompareTag("Key"))
+        {
+            m_player.transform.position += new Vector3(pDir.x, pDir.y, 0);
+            
+            Destroy(facing.gameObject);
+            foreach(var b in m_lockedBoxes) Destroy(b.gameObject);
         }
 
         facing = Physics2D.OverlapBox((Vector2)m_player.transform.position, new Vector2(0.2f, 0.2f), 0, 1 << 9);
