@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: bada44bef0d11c44da299b26eb35f7ed
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Elice DigitalBaeum
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 203f63c188bccc74b9e68d96c3659b98, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
