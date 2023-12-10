@@ -13,6 +13,7 @@ public class PuzzleLogic : MonoBehaviour
     [SerializeField] private GameObject WallTile;           // w
     [SerializeField] private GameObject BoxTile;            // b
     [SerializeField] private GameObject SpikeTile;          // s
+    [SerializeField] private GameObject BoxOnSpikeTile;     // n
     [SerializeField] private GameObject OnOffSpikeTile;     // A / v
     [SerializeField] private GameObject SpecialSpikeTile;   // 1 - ??
 
@@ -64,9 +65,11 @@ public class PuzzleLogic : MonoBehaviour
                         SummonTile(SpikeTile, i, j, width, height);
                         break;
                     case 'A':
+                        SummonTile(EmptyTile, i, j, width, height);
                         SummonTile(OnOffSpikeTile, i, j, width, height).GetComponent<OnOffSpike>().Init(this, true);
                         break;
                     case 'v':
+                        SummonTile(EmptyTile, i, j, width, height);
                         SummonTile(OnOffSpikeTile, i, j, width, height).GetComponent<OnOffSpike>().Init(this, false);
                         break;
                     case 'b':
@@ -84,6 +87,11 @@ public class PuzzleLogic : MonoBehaviour
                     case 'p':
                         SummonTile(EmptyTile, i, j, width, height);
                         m_player = SummonTile(Player, i, j, width, height);
+                        break;
+                    case 'n':
+                        SummonTile(EmptyTile, i, j, width, height);
+                        SummonTile(SpikeTile, i, j, width, height);
+                        SummonTile(BoxTile, i, j, width, height);
                         break;
 
                     default: break;
