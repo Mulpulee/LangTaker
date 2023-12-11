@@ -343,6 +343,93 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &259254015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 259254017}
+  - component: {fileID: 259254016}
+  - component: {fileID: 259254019}
+  - component: {fileID: 259254018}
+  m_Layer: 0
+  m_Name: PuzzleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &259254016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259254015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 865a01b9b6f140f4da74135f0567f41a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CountDisplay: {fileID: 1622917837}
+  m_loader: {fileID: 259254019}
+  TurnChange: 0
+--- !u!4 &259254017
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259254015}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &259254018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259254015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 563dbb9f868a1f04eab975b72396edd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_luaScript: {fileID: 0}
+--- !u!114 &259254019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259254015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd32a9ce795abc4883528828c3cc17a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 1219990129490083459, guid: 30994d6058af5ef478281146fc271251, type: 3}
+  Monster: {fileID: 7047227082135873657, guid: 34184816b7af75e4e90378fb22ce97ad, type: 3}
+  Goal: {fileID: 7047227082135873657, guid: 4b23b23a1b5fe324d90d15e8767c6f6c, type: 3}
+  Key: {fileID: 1219990129490083459, guid: 695feb44083e07645a7b08e9b4d2714d, type: 3}
+  EmptyTile: {fileID: 8453052216188538048, guid: a1083391ae4e7164bb26e2290e9db4e5, type: 3}
+  WallTile: {fileID: 7047227082135873657, guid: 739e45655547d4e49a5c7c72ee593f63, type: 3}
+  BoxTile: {fileID: 7047227082135873657, guid: e6e17bf21fd67fe4286ebd625ec5fc80, type: 3}
+  LockedBoxTile: {fileID: 7047227082135873657, guid: 00f5ee2885b4a794e8dfac189a6e3c08, type: 3}
+  SpikeTile: {fileID: 7047227082135873657, guid: 5b70a988e4c93f541b4f481a0fc90f33, type: 3}
+  OnOffSpikeTile: {fileID: 7047227082135873657, guid: 3ee4b4d6f4858bb4491bafb8f2cb9fcf, type: 3}
+  SpecialSpikeTile: {fileID: 7047227082135873657, guid: 3e827ed8d92f0b2409f503e9ba827db5, type: 3}
+  m_lua: {fileID: 259254018}
+  m_logic: {fileID: 259254016}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +526,7 @@ GameObject:
   - component: {fileID: 538626878}
   - component: {fileID: 538626877}
   m_Layer: 5
-  m_Name: resume
+  m_Name: restart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -485,7 +572,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a6b127eae9e5d594c87b83baf1109002, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 33c8d48eddd55114784ab38b13178bfd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -521,7 +608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &737688800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,12 +638,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -581,7 +668,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &737688803
 RectTransform:
@@ -885,12 +972,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

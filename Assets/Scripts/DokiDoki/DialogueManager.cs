@@ -26,7 +26,7 @@ public class DialogueManager : MonoBehaviour
             }
             return m_instance;
         }
-    }//æﬂ∏≈ ΩÃ±€≈Ê
+    }
 
     private DialogueUI m_dialogueUI;
     private DialogueMachine m_dialogueMachine;
@@ -43,7 +43,7 @@ public class DialogueManager : MonoBehaviour
         Debug.Log(dialogueCommon);
         m_dialogueLuaEnv.DoString(dialogueCommon.text);
 
-        TextAsset[] scripts = Resources.LoadAll<TextAsset>("Dialogue");
+        TextAsset[] scripts = Resources.LoadAll<TextAsset>("Dialogues");
         foreach (var script in scripts)
         {
             Debug.Log(script);

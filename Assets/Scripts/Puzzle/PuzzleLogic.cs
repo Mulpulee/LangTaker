@@ -1,31 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PuzzleLogic : MonoBehaviour
 {
-    [SerializeField] private GameObject Player;             // p
-    [SerializeField] private GameObject Monster;            // m
-    [SerializeField] private GameObject Goal;               // g
-    [SerializeField] private GameObject Key;                // k
-    [SerializeField] private GameObject EmptyTile;          // .
-    [SerializeField] private GameObject WallTile;           // w
-    [SerializeField] private GameObject BoxTile;            // b
-    [SerializeField] private GameObject LockedBoxTile;      // l
-    [SerializeField] private GameObject SpikeTile;          // s
-    [SerializeField] private GameObject OnOffSpikeTile;     // A / v
-    [SerializeField] private GameObject SpecialSpikeTile;   // 1 - ??
-
     [SerializeField] private Text CountDisplay;
 
-    [SerializeField] private LuaRunner m_lua;
+    [SerializeField] private PuzzleLoader m_loader;
 
-    [SerializeField] private string MapName;
-
-    private string m_map;
-    private GameObject MapParent;
+    private string m_mapName;
+    private string m_lang;
 
     private GameObject m_player;
 
@@ -34,89 +19,13 @@ public class PuzzleLogic : MonoBehaviour
 
     public bool TurnChange = false;
 
-    private void Start()
+    public void Init(string pMap, string pLang, GameObject pPlayer, List<GameObject> pLockedBoxes, int pMoveCount)
     {
-        StartGame();
-    }
-
-    private void StartGame()
-    {
-        Map pMap = m_lua.GetMap(MapName);
-        m_moveCount = (int)pMap.TurnCount;
-
-        int width = (int)pMap.Width;
-        int height = (int)pMap.Height;
-
-        m_map = pMap.Puzzle;
-        MapParent = new GameObject("Map");
-        m_lockedBoxes = new List<GameObject>();
-
-        for(int i = 0; i < height; i++)
-        {
-            for (int j = 0; j < width; j++)
-            {
-                switch (m_map[i * width + j])
-                {
-                    case '.':
-                        SummonTile(EmptyTile, i, j, width, height);
-                        break;
-                    case 'w':
-                        SummonTile(WallTile, i, j, width, height);
-                        break;
-                    case 's':
-                        SummonTile(EmptyTile, i, j, width, height);
-                        SummonTile(SpikeTile, i, j, width, height);
-                        break;
-                    case 'A':
-                        SummonTile(EmptyTile, i, j, width, height);
-                        SummonTile(OnOffSpikeTile, i, j, width, height).GetComponent<OnOffSpike>().Init(this, true);
-                        break;
-                    case 'v':
-                        SummonTile(EmptyTile, i, j, width, height);
-                        SummonTile(OnOffSpikeTile, i, j, width, height).GetComponent<OnOffSpike>().Init(this, false);
-                        break;
-                    case 'b':
-                        SummonTile(EmptyTile, i, j, width, height);
-                        SummonTile(BoxTile, i, j, width, height);
-                        break;
-                    case 'k':
-                        SummonTile(EmptyTile, i, j, width, height);
-                        SummonTile(Key, i, j, width, height);
-                        break;
-                    case 'l':
-                        SummonTile(EmptyTile, i, j, width, height);
-                        m_lockedBoxes.Add(SummonTile(LockedBoxTile, i, j, width, height));
-                        break;
-                    case 'm':
-                        SummonTile(EmptyTile, i, j, width, height);
-                        SummonTile(Monster, i, j, width, height);
-                        break;
-                    case 'g':
-                        SummonTile(EmptyTile, i, j, width, height);
-                        SummonTile(Goal, i, j, width, height);
-                        break;
-                    case 'p':
-                        SummonTile(EmptyTile, i, j, width, height);
-                        m_player = SummonTile(Player, i, j, width, height);
-                        break;
-                    case 'n': // Box on Spike
-                        SummonTile(EmptyTile, i, j, width, height);
-                        SummonTile(SpikeTile, i, j, width, height);
-                        SummonTile(BoxTile, i, j, width, height);
-                        break;
-
-                    default: break;
-                }
-            }
-        }
-
-        Camera.main.orthographicSize = height / 2 + 1;
-    }
-
-    private GameObject SummonTile(GameObject pTile, int i, int j, int w, int h)
-    {
-        return Instantiate(pTile, new Vector3(j - w / 2, h - i - (float)h / 2 - 0.5f, 0),
-            Quaternion.identity, MapParent.transform);
+        m_mapName = pMap;
+        m_lang = pLang;
+        m_player = pPlayer;
+        m_lockedBoxes = pLockedBoxes;
+        m_moveCount = pMoveCount;
     }
 
     private void Update()
@@ -137,7 +46,6 @@ public class PuzzleLogic : MonoBehaviour
         {
             PlayerMove(Vector2.right);
         }
-
         if (Input.GetKeyDown(KeyCode.R))
         {
             ResetMap();
@@ -200,15 +108,20 @@ public class PuzzleLogic : MonoBehaviour
         }
 
         m_moveCount--;
-        CountDisplay.text = m_moveCount.ToString();
+        CountDisplay.text = m_moveCount.ToString() + ".";
         TurnChange = !TurnChange;
         return;
     }
 
     private void ResetMap()
     {
-        Destroy(MapParent);
         TurnChange = false;
-        StartGame();
+        m_loader.StartGame(m_mapName, m_lang);
+    }
+    
+    public void ResetMap(string pMap, string pLang)
+    {
+        TurnChange = false;
+        m_loader.StartGame(pMap, pLang);
     }
 }

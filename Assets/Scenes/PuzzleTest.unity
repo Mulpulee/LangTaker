@@ -466,6 +466,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1744749944}
   - component: {fileID: 1744749943}
+  - component: {fileID: 1744749947}
+  - component: {fileID: 1744749946}
   - component: {fileID: 1744749945}
   m_Layer: 0
   m_Name: MapMaker
@@ -486,20 +488,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 865a01b9b6f140f4da74135f0567f41a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 1219990129490083459, guid: 30994d6058af5ef478281146fc271251, type: 3}
-  Monster: {fileID: 7047227082135873657, guid: 34184816b7af75e4e90378fb22ce97ad, type: 3}
-  Goal: {fileID: 7047227082135873657, guid: 4b23b23a1b5fe324d90d15e8767c6f6c, type: 3}
-  Key: {fileID: 1219990129490083459, guid: 695feb44083e07645a7b08e9b4d2714d, type: 3}
-  EmptyTile: {fileID: 8453052216188538048, guid: a1083391ae4e7164bb26e2290e9db4e5, type: 3}
-  WallTile: {fileID: 7047227082135873657, guid: 739e45655547d4e49a5c7c72ee593f63, type: 3}
-  BoxTile: {fileID: 7047227082135873657, guid: e6e17bf21fd67fe4286ebd625ec5fc80, type: 3}
-  LockedBoxTile: {fileID: 7047227082135873657, guid: 00f5ee2885b4a794e8dfac189a6e3c08, type: 3}
-  SpikeTile: {fileID: 7047227082135873657, guid: 5b70a988e4c93f541b4f481a0fc90f33, type: 3}
-  OnOffSpikeTile: {fileID: 7047227082135873657, guid: 3ee4b4d6f4858bb4491bafb8f2cb9fcf, type: 3}
-  SpecialSpikeTile: {fileID: 7047227082135873657, guid: 3e827ed8d92f0b2409f503e9ba827db5, type: 3}
   CountDisplay: {fileID: 913793364}
-  m_lua: {fileID: 1744749945}
-  MapName: Map_C
+  m_loader: {fileID: 1744749947}
   TurnChange: 0
 --- !u!4 &1744749944
 Transform:
@@ -529,3 +519,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_luaScript: {fileID: 2213920135882650261, guid: 0928b3bf777dc5b49a66fbc8caec50f5, type: 3}
+--- !u!114 &1744749946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744749942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95a9189d5d84df2428b4d3ed417a085b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logic: {fileID: 1744749943}
+  MapName: Map_C
+  Lang: c
+--- !u!114 &1744749947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744749942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd32a9ce795abc4883528828c3cc17a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 1219990129490083459, guid: 30994d6058af5ef478281146fc271251, type: 3}
+  Monster: {fileID: 7047227082135873657, guid: 34184816b7af75e4e90378fb22ce97ad, type: 3}
+  Goal: {fileID: 7047227082135873657, guid: 4b23b23a1b5fe324d90d15e8767c6f6c, type: 3}
+  Key: {fileID: 1219990129490083459, guid: 695feb44083e07645a7b08e9b4d2714d, type: 3}
+  EmptyTile: {fileID: 8453052216188538048, guid: a1083391ae4e7164bb26e2290e9db4e5, type: 3}
+  WallTile: {fileID: 7047227082135873657, guid: 739e45655547d4e49a5c7c72ee593f63, type: 3}
+  BoxTile: {fileID: 7047227082135873657, guid: e6e17bf21fd67fe4286ebd625ec5fc80, type: 3}
+  LockedBoxTile: {fileID: 7047227082135873657, guid: 00f5ee2885b4a794e8dfac189a6e3c08, type: 3}
+  SpikeTile: {fileID: 7047227082135873657, guid: 5b70a988e4c93f541b4f481a0fc90f33, type: 3}
+  OnOffSpikeTile: {fileID: 7047227082135873657, guid: 3ee4b4d6f4858bb4491bafb8f2cb9fcf, type: 3}
+  SpecialSpikeTile: {fileID: 7047227082135873657, guid: 3e827ed8d92f0b2409f503e9ba827db5, type: 3}
+  m_lua: {fileID: 1744749945}
+  m_logic: {fileID: 1744749943}

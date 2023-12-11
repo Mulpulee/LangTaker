@@ -6,12 +6,14 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 using DialogueSystem;
+using System.Collections.Generic;
 
 public class DialogueUI : MonoBehaviour, IDialogueInput, IDialogueOutput
 {
     [SerializeField] private Text m_talkLineText;
     [SerializeField] private Text m_talkerNameText;
     [SerializeField] private Image m_illustImage;
+    [SerializeField] private Image m_selectShade;
     [SerializeField] private TextButton[] m_selectionButtons;
 
     private CanvasGroup m_canvasGroup;
@@ -21,6 +23,7 @@ public class DialogueUI : MonoBehaviour, IDialogueInput, IDialogueOutput
     private String m_illustPath;
     private String[] m_selections;
 
+    private Dictionary<String, Sprite> m_illusts;
 
     private Int32 m_lastIndex;
     private Coroutine m_printRoutine;
@@ -32,14 +35,18 @@ public class DialogueUI : MonoBehaviour, IDialogueInput, IDialogueOutput
         m_lastIndex = -1;
         m_canvasGroup = GetComponent<CanvasGroup>();
         m_canvasGroup.Hide();
-    }
 
+        m_illusts = new Dictionary<String, Sprite>();
+        foreach(var s in Resources.LoadAll<Sprite>("Illust"))
+        {
+            m_illusts.Add(s.name, s);
+        }
+    }
 
     public int ReadSelection()
     {
         return m_lastIndex;
     }
-
 
     public void WriteLine(string pLine)
     {
@@ -80,9 +87,9 @@ public class DialogueUI : MonoBehaviour, IDialogueInput, IDialogueOutput
         m_canvasGroup.Hide();
     }
 
-
     private void HideAllButtons()
     {
+        m_selectShade.gameObject.SetActive(false);
         foreach (var button in m_selectionButtons)
         {
             button.CanvasGroup.Hide();
@@ -109,7 +116,8 @@ public class DialogueUI : MonoBehaviour, IDialogueInput, IDialogueOutput
     {
         m_talkLineText.text = "";
         m_talkerNameText.text = m_talkerName;
-        m_illustImage.sprite = Resources.Load<Sprite>($"Illust/{m_illustPath}");
+        m_illustImage.sprite = m_illusts[m_illustPath];
+        m_illustImage.SetNativeSize();
 
         if (m_selections == null)
         {
@@ -127,20 +135,20 @@ public class DialogueUI : MonoBehaviour, IDialogueInput, IDialogueOutput
             }
             m_isPrinting = false;
 
-            //다 출력하면 스페이스바를 눌러 다음으로
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
             pNext.Invoke();
         }
         else
         {
             m_talkLineText.text = m_talkLine;
+            m_selectShade.gameObject.SetActive(true);
             for(int i=0;i<m_selections.Length;i++)
             {
-                Int32 index = i; //이거 반드시 필요함!! 람다식 캡쳐 내부에 그냥 i를 쓰면 문제 생김!!
+                Int32 index = i;
                 m_selectionButtons[i].CanvasGroup.Show();
                 m_selectionButtons[i].Text.text = m_selections[i];
                 m_selectionButtons[i].Button.onClick.RemoveAllListeners();
-                m_selectionButtons[i].Button.onClick.AddListener(() => OnSelect(index)); //여기 주의!!!!! 
+                m_selectionButtons[i].Button.onClick.AddListener(() => OnSelect(index));
                 m_selectionButtons[i].Button.onClick.AddListener(new UnityAction(pNext));
             }
             m_selections = null;

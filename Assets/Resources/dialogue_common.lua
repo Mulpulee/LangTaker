@@ -2,12 +2,12 @@
 
 local util = require('xlua.util')
 
-function Talk(pTalker,pTalkLine,pIllust,pBackground)
-    local talkLine = CS.DialogueSystem.DialogueTalkLine(pTalker,pTalkLine,pIllust,pBackground)
+function Talk(pTalker,pTalkLine,pIllust)
+    local talkLine = CS.DialogueSystem.DialogueTalkLine(pTalker,pTalkLine,pIllust)
     coroutine.yield(talkLine)
 end
-function MakeSelect(pTalker,pTalkLine,pIllust,pBackground,pSelects)
-    local selectLine = CS.DialogueSystem.DialogueSelectLine(pTalker,pTalkLine,pIllust,pBackground,pSelects)
+function MakeSelect(pTalker,pTalkLine,pIllust,pSelects)
+    local selectLine = CS.DialogueSystem.DialogueSelectLine(pTalker,pTalkLine,pIllust,pSelects)
     coroutine.yield(selectLine)
     local handler = CS.DialogueSystem.IntInput()
     local inputHandleLine = CS.DialogueSystem.DialogueInputHandleLine(handler)

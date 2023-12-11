@@ -21,10 +21,17 @@ public class OnOffSpike : MonoBehaviour
         m_collider = GetComponent<Collider2D>();
     }
 
-    public void Init(PuzzleLogic pPuzzle, bool pOnOff)
+    public void Init(PuzzleLogic pPuzzle, bool pOnOff, Sprite pOn = null, Sprite pOff = null)
     {
         m_puzzle = pPuzzle;
         m_isSpikeOn = !pOnOff;
+
+        if(pOff != null)
+        {
+            OnSpikeSprite = pOn;
+            OffSpikeSprite = pOff;
+        }
+
         ChangeState();
     }
 
