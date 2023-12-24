@@ -43,6 +43,11 @@ public class DialogueUI : MonoBehaviour, IDialogueInput, IDialogueOutput
         }
     }
 
+    private void Start()
+    {
+        DialogueManager.Instance.RunDialog("JS_1");
+    }
+
     public int ReadSelection()
     {
         return m_lastIndex;

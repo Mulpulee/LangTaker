@@ -11,38 +11,23 @@
 -- 가시 : s
 -- 꺼진가시 : v
 -- 켜진가시 : A
--- 특수가시 : 1 ~
+-- 특수가시 : ({[<>]})
+-- 부서지는 상자 : 1 ~ 9
+-- 포탈 : o
 
-Map_C = {
-    TurnCount = 53,
-    Width = 13,
-    Height = 15,
-    Puzzle =
-    "00000wwww0000" ..
-    "000ww.sbsww00" ..
-    "00wbsbs.s.sw0" ..
-    "0ws..bsbs.s.w" ..
-    "0ws.sbwwsbs.w" ..
-    "w.sbsw00wb.pw" ..
-    "wbs.w0000wwww" ..
-    "w..bw00000000" ..
-    "w.s.w0000wwww" ..
-    "w.sb.w00w.sgw" ..
-    "0ws.sbwwsbs.w" ..
-    "0wsbs.sbs..bw" ..
-    "00wbsb..sbsw0" ..
-    "000wwbsbsww00" ..
-    "00000wwww0000"
-}
 
-Map_temp = {
-    TurnCount = 3,
-    Width = 3,
+test = {
+    TurnCount = 22,
+    Width = 10,
     Height = 5,
     Puzzle =
-    "www" ..
-    "wsw" ..
-    "wpw" ..
-    "w.w" ..
-    "www"
+    "wwwwwwwwww" ..
+    "w12345678w" ..
+    "wo.{.....w" ..
+    "w9....o.pw" ..
+    "wwwwwwwwww"
+}
+
+SpecialPattern = {
+    Pattern1 = {true, true, true, false}
 }

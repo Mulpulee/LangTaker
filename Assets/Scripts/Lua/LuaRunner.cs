@@ -12,6 +12,15 @@ public interface Map
     string Puzzle { get; }
 }
 
+[CSharpCallLua]
+public interface Pattern
+{
+    bool[] Pattern1 { get; }
+    bool[] Pattern2 { get; }
+    bool[] Pattern3 { get; }
+    bool[] Pattern4 { get; }
+}
+
 public class LuaRunner : MonoBehaviour
 {
     [SerializeField] private TextAsset m_luaScript;
@@ -27,5 +36,11 @@ public class LuaRunner : MonoBehaviour
         m_luaEnv.DoString(m_luaScript.text);
         Map map = m_luaEnv.Global.Get<Map>(pMapName);
         return map;
+    }
+
+    public Pattern GetPatterns()
+    {
+        m_luaEnv.DoString(m_luaScript.text);
+        return m_luaEnv.Global.Get<Pattern>("SpecialPattern");
     }
 }

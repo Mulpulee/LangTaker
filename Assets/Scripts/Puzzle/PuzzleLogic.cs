@@ -14,18 +14,20 @@ public class PuzzleLogic : MonoBehaviour
 
     private GameObject m_player;
 
-    private List<GameObject> m_lockedBoxes;
     private int m_moveCount;
+    private bool m_gotKey = false;
+
+    private GameObject[] m_portals;
 
     public bool TurnChange = false;
 
-    public void Init(string pMap, string pLang, GameObject pPlayer, List<GameObject> pLockedBoxes, int pMoveCount)
+    public void Init(string pMap, string pLang, GameObject pPlayer, int pMoveCount, GameObject[] pPortals)
     {
         m_mapName = pMap;
         m_lang = pLang;
         m_player = pPlayer;
-        m_lockedBoxes = pLockedBoxes;
         m_moveCount = pMoveCount;
+        m_portals = pPortals;
     }
 
     private void Update()
@@ -51,12 +53,12 @@ public class PuzzleLogic : MonoBehaviour
             ResetMap();
         }
 
-        CountDisplay.text = m_moveCount.ToString();
+        CountDisplay.text = m_moveCount.ToString() + ".";
     }
 
     private void PlayerMove(Vector2 pDir)
     {
-        Collider2D facing = Physics2D.OverlapBox((Vector2)m_player.transform.position + pDir, new Vector2(0.2f, 0.2f), 0, 1 << 8);
+        Collider2D facing = CheckTile(m_player.transform, 8, pDir);
 
         if (facing == null)
         {
@@ -68,15 +70,14 @@ public class PuzzleLogic : MonoBehaviour
         }
         else if (facing.CompareTag("Box"))
         {
-            Collider2D further = Physics2D.OverlapBox((Vector2)facing.transform.position + pDir, new Vector2(0.2f, 0.2f), 0, 1 << 8);
-            if (further == null)
+            if (CheckTile(facing.transform, 8, pDir) == null)
             {
                 facing.transform.position += new Vector3(pDir.x, pDir.y, 0);
             }
         }
         else if (facing.CompareTag("Monster"))
         {
-            Collider2D further = Physics2D.OverlapBox((Vector2)facing.transform.position + pDir, new Vector2(0.2f, 0.2f), 0, 1 << 8);
+            Collider2D further = CheckTile(facing.transform, 8, pDir);
             if (further == null)
             {
                 facing.transform.position += new Vector3(pDir.x, pDir.y, 0);
@@ -86,7 +87,7 @@ public class PuzzleLogic : MonoBehaviour
                 Destroy(facing.gameObject);
             }
 
-            further = Physics2D.OverlapBox((Vector2)facing.transform.position, new Vector2(0.2f, 0.2f), 0, 1 << 9);
+            further = CheckTile(facing.transform, 9, Vector2.zero);
             if (further != null && further.CompareTag("Spike"))
             {
                 Destroy(facing.gameObject);
@@ -97,11 +98,27 @@ public class PuzzleLogic : MonoBehaviour
             m_player.transform.position += new Vector3(pDir.x, pDir.y, 0);
             
             Destroy(facing.gameObject);
-            foreach(var b in m_lockedBoxes) Destroy(b.gameObject);
+            m_gotKey = true;
+        }
+        else if (facing.CompareTag("LockedBox"))
+        {
+            if (m_gotKey) Destroy(facing.gameObject);
+        }
+        else if (facing.CompareTag("BreakableBox"))
+        {
+            if(facing.GetComponent<BreakableBox>().GetHit()) Destroy(facing.gameObject);
+        }
+        else if (facing.CompareTag("Portal_1"))
+        {
+            m_player.transform.position = m_portals[1].transform.position;
+        }
+        else if (facing.CompareTag("Portal_2"))
+        {
+            m_player.transform.position = m_portals[0].transform.position;
         }
 
-        facing = Physics2D.OverlapBox((Vector2)m_player.transform.position, new Vector2(0.2f, 0.2f), 0, 1 << 9);
-        
+        facing = CheckTile(m_player.transform, 9, Vector2.zero);
+
         if (facing != null && facing.CompareTag("Spike"))
         {
             m_moveCount--;
@@ -113,15 +130,20 @@ public class PuzzleLogic : MonoBehaviour
         return;
     }
 
+    private Collider2D CheckTile(Transform pTarget, int pLayer, Vector2 pDir)
+    {
+        return Physics2D.OverlapBox((Vector2)pTarget.position + pDir, new Vector2(0.2f, 0.2f), 0, 1 << pLayer);
+    }
+
     private void ResetMap()
     {
-        TurnChange = false;
+        TurnChange = false; m_gotKey = false;
         m_loader.StartGame(m_mapName, m_lang);
     }
     
     public void ResetMap(string pMap, string pLang)
     {
-        TurnChange = false;
+        TurnChange = false; m_gotKey = false;
         m_loader.StartGame(pMap, pLang);
     }
 }

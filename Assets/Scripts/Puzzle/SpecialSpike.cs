@@ -6,6 +6,10 @@ public class SpecialSpike : MonoBehaviour
 {
     [SerializeField] private Sprite OnSpikeSprite;
     [SerializeField] private Sprite OffSpikeSprite;
+    [SerializeField] private Sprite OnMarker;
+    [SerializeField] private Sprite OffMarker;
+
+    [SerializeField] private SpriteRenderer[] PatternMarkers;
 
     private bool m_isSpikeOn;
     private bool[] m_pattern;
@@ -30,6 +34,12 @@ public class SpecialSpike : MonoBehaviour
         m_puzzle = pPuzzle;
         m_pattern = pPattern;
         m_index = 3;
+
+        for(int i = 0; i < 4; i++)
+        {
+            PatternMarkers[i].sprite = pPattern[i] ? OnMarker : OffMarker;
+        }
+
         ChangeState();
     }
 
@@ -45,7 +55,7 @@ public class SpecialSpike : MonoBehaviour
 
         checkChange = m_puzzle.TurnChange;
         m_isSpikeOn = m_pattern[m_index];
-        m_collider.enabled = !m_isSpikeOn;
+        m_collider.enabled = m_pattern[(m_index == 3 ? 0 : m_index + 1)];
         
         m_spriteRenderer.sprite = m_isSpikeOn ? OnSpikeSprite : OffSpikeSprite;
     }

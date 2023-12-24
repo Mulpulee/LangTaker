@@ -31,6 +31,8 @@ namespace XLua.CSObjectWrap
             
             translator.AddInterfaceBridgeCreator(typeof(Map), MapBridge.__Create);
             
+            translator.AddInterfaceBridgeCreator(typeof(Pattern), PatternBridge.__Create);
+            
         }
         
 	    static XLua_Gen_Initer_Register__()

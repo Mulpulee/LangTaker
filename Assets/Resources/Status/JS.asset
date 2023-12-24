@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e216ab3fbe75d418cf89d3fe846f6a, type: 3}
+  m_Name: JS
+  m_EditorClassIdentifier: 
+  Type: 0
+  Illust: {fileID: 21300000, guid: 988180e146c2f2942b5ca4c43f76d614, type: 3}
+  Description: "JavaScript\uC785\uB2C8\uB2E4. \uC624, \uC2DC\uBC1C JA\uB97C \uAC74\uB108\uB6F0\uACE0
+    JS\uC5D0 Java\uAC78 \uC801\uC5C8\uC74C"

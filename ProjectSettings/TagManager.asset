@@ -10,6 +10,10 @@ TagManager:
   - Spike
   - Key
   - Goal
+  - LockedBox
+  - BreakableBox
+  - Portal_1
+  - Portal_2
   layers:
   - Default
   - TransparentFX

@@ -10,12 +10,14 @@ public class PuzzleLoader : MonoBehaviour
     [SerializeField] private GameObject Goal;               // g
     [SerializeField] private GameObject Key;                // k
     [SerializeField] private GameObject EmptyTile;          // .
-    [SerializeField] private GameObject WallTile;           // w
-    [SerializeField] private GameObject BoxTile;            // b
-    [SerializeField] private GameObject LockedBoxTile;      // l
-    [SerializeField] private GameObject SpikeTile;          // s
-    [SerializeField] private GameObject OnOffSpikeTile;     // A / v
-    [SerializeField] private GameObject SpecialSpikeTile;   // 1 - ??
+    [SerializeField] private GameObject Wall;               // w
+    [SerializeField] private GameObject Box;                // b
+    [SerializeField] private GameObject BreakableBox;       // 1 - 9
+    [SerializeField] private GameObject LockedBox;          // l
+    [SerializeField] private GameObject Spike;              // s
+    [SerializeField] private GameObject OnOffSpike;         // A / v
+    [SerializeField] private GameObject SpecialSpike;       // ({[<>]})
+    [SerializeField] private GameObject Portal;             // o
 
     [SerializeField] private LuaRunner m_lua;
     [SerializeField] private PuzzleLogic m_logic;
@@ -23,29 +25,30 @@ public class PuzzleLoader : MonoBehaviour
     private string m_mapName;
     private string m_lang;
     private Dictionary<string, Dictionary<string, Sprite>> m_sprites;
+    private GameObject[] m_portals;
 
     private string m_map;
     private GameObject MapParent;
 
     private GameObject m_player;
 
-    private List<GameObject> m_lockedBoxes;
     private int m_moveCount;
 
     private void Awake()
     {
-        m_sprites = new Dictionary<string, Dictionary<string, Sprite>>();
+        m_sprites = new Dictionary<string, Dictionary<string, Sprite>>
+        {
+            { "c", new Dictionary<string, Sprite>() },
+            { "c++", new Dictionary<string, Sprite>() },
+            { "c#", new Dictionary<string, Sprite>() },
+            { "java", new Dictionary<string, Sprite>() },
+            { "js", new Dictionary<string, Sprite>() },
+            { "python", new Dictionary<string, Sprite>() },
+            { "ruby", new Dictionary<string, Sprite>() },
+            { "lua", new Dictionary<string, Sprite>() }
+        };
 
-        m_sprites.Add("c", new Dictionary<string, Sprite>());
-        m_sprites.Add("c++", new Dictionary<string, Sprite>());
-        m_sprites.Add("c#", new Dictionary<string, Sprite>());
-        m_sprites.Add("java", new Dictionary<string, Sprite>());
-        m_sprites.Add("js", new Dictionary<string, Sprite>());
-        m_sprites.Add("python", new Dictionary<string, Sprite>());
-        m_sprites.Add("ruby", new Dictionary<string, Sprite>());
-        m_sprites.Add("lua", new Dictionary<string, Sprite>());
-
-        foreach(var d in m_sprites)
+        foreach (var d in m_sprites)
         {
             foreach (var s in Resources.LoadAll<Sprite>($"Object/{d.Key}"))
             {
@@ -56,10 +59,13 @@ public class PuzzleLoader : MonoBehaviour
 
     public void StartGame(string pMap, string pLang)
     {
+        SceneManagerEx.Instance.PlayLoading(true);
         m_mapName = pMap;
         m_lang = pLang;
         Map map = m_lua.GetMap(pMap);
         m_moveCount = (int)map.TurnCount;
+
+        Pattern m_patterns = m_lua.GetPatterns();
 
         int width = (int)map.Width;
         int height = (int)map.Height;
@@ -67,7 +73,7 @@ public class PuzzleLoader : MonoBehaviour
         m_map = map.Puzzle;
         if (MapParent != null) Destroy(MapParent);
         MapParent = new GameObject("Map");
-        m_lockedBoxes = new List<GameObject>();
+        m_portals = new GameObject[2];
 
         for (int i = 0; i < height; i++)
         {
@@ -79,23 +85,23 @@ public class PuzzleLoader : MonoBehaviour
                         SummonTile(EmptyTile, i, j, width, height);
                         break;
                     case 'w':
-                        SummonTile(WallTile, i, j, width, height);
+                        SummonTile(Wall, i, j, width, height);
                         break;
                     case 's':
                         SummonTile(EmptyTile, i, j, width, height);
-                        SummonTile(SpikeTile, i, j, width, height, "spike");
+                        SummonTile(Spike, i, j, width, height, "spike");
                         break;
                     case 'A':
                         SummonTile(EmptyTile, i, j, width, height);
-                        SummonTile(OnOffSpikeTile, i, j, width, height, "nspike");
+                        SummonTile(OnOffSpike, i, j, width, height, "nspike");
                         break;
                     case 'v':
                         SummonTile(EmptyTile, i, j, width, height);
-                        SummonTile(OnOffSpikeTile, i, j, width, height, "fspike");
+                        SummonTile(OnOffSpike, i, j, width, height, "fspike");
                         break;
                     case 'b':
                         SummonTile(EmptyTile, i, j, width, height);
-                        SummonTile(BoxTile, i, j, width, height, "box");
+                        SummonTile(Box, i, j, width, height, "box");
                         break;
                     case 'k':
                         SummonTile(EmptyTile, i, j, width, height);
@@ -103,7 +109,7 @@ public class PuzzleLoader : MonoBehaviour
                         break;
                     case 'l':
                         SummonTile(EmptyTile, i, j, width, height);
-                        m_lockedBoxes.Add(SummonTile(LockedBoxTile, i, j, width, height));
+                        SummonTile(LockedBox, i, j, width, height);
                         break;
                     case 'm':
                         SummonTile(EmptyTile, i, j, width, height);
@@ -119,28 +125,55 @@ public class PuzzleLoader : MonoBehaviour
                         break;
                     case 'n': // Box on Spike
                         SummonTile(EmptyTile, i, j, width, height);
-                        SummonTile(SpikeTile, i, j, width, height, "spike");
-                        SummonTile(BoxTile, i, j, width, height, "box");
+                        SummonTile(Spike, i, j, width, height, "spike");
+                        SummonTile(Box, i, j, width, height, "box");
+                        break;
+                    case 'o':
+                        SummonTile(EmptyTile, i, j, width, height);
+                        if(m_portals[0] == null) m_portals[0] = SummonTile(Portal, i, j, width, height, "portal");
+                        else m_portals[1] = SummonTile(Portal, i, j, width, height, "portal");
                         break;
 
-                    default: break;
+                    case '{':
+                        SummonTile(EmptyTile, i, j, width, height);
+                        SummonTile(SpecialSpike, i, j, width, height, "special", m_patterns.Pattern1);
+                        break;
+
+
+                    default:
+                        if (1 <= int.Parse(m_map[i * width + j] + "")
+                            && int.Parse(m_map[i * width + j] + "") <= 9)
+                        {
+                            SummonTile(EmptyTile, i, j, width, height);
+                            SummonTile(BreakableBox, i, j, width, height, "box").
+                                GetComponent<BreakableBox>().SetDurabillity(int.Parse(m_map[i * width + j] + ""));
+                        }
+                        break;
                 }
             }
         }
 
-        Camera.main.orthographicSize = height / 2 + 1;
-        m_logic.Init(m_mapName, m_lang, m_player, m_lockedBoxes, m_moveCount);
+        if (m_portals[0] != null)
+        {
+            m_portals[0].tag = "Portal_1";
+            m_portals[1].tag = "Portal_2";
+        }
+        Camera.main.orthographicSize = height / 2 + 2.5f;
+        m_logic.Init(m_mapName, m_lang, m_player, m_moveCount, m_portals);
     }
 
-    private GameObject SummonTile(GameObject pTile, int i, int j, int w, int h, string type = "")
+    private GameObject SummonTile(GameObject pTile, int i, int j, int w, int h, string type = "", bool[] pattern = null)
     {
-        GameObject go = Instantiate(pTile, new Vector3(j - w / 2, h - i - (float)h / 2 - 0.5f, 0),
+        GameObject go = Instantiate(pTile, new Vector3(j - w / 2.0f + 0.5f, h - i - (float)h / 2.0f - 0.9f, 0),
             Quaternion.identity, MapParent.transform);
 
-        if(type == "nspike")
+        if (type == "nspike")
             go.GetComponent<OnOffSpike>().Init(m_logic, true, m_sprites[m_lang]["spike"], m_sprites[m_lang]["offspike"]);
-        else if(type == "fspike")
+        else if (type == "fspike")
             go.GetComponent<OnOffSpike>().Init(m_logic, false, m_sprites[m_lang]["spike"], m_sprites[m_lang]["offspike"]);
+        else if (type == "special")
+            go.GetComponent<SpecialSpike>().Init(m_logic, pattern);
+        else if (type == "portal") { }
         else if (type != "")
             go.GetComponent<SpriteRenderer>().sprite = m_sprites[m_lang][type];
 
