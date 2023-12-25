@@ -174,8 +174,8 @@ public class PuzzleLoader : MonoBehaviour
         else if (type == "special")
             go.GetComponent<SpecialSpike>().Init(m_logic, pattern);
         else if (type == "portal") { }
-        else if (type != "")
-            go.GetComponent<SpriteRenderer>().sprite = m_sprites[m_lang][type];
+        //else if (type != "")
+        //    go.GetComponent<SpriteRenderer>().sprite = m_sprites[m_lang][type];
 
         return go;
     }
