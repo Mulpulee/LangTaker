@@ -38,6 +38,16 @@ public class OnOffSpike : MonoBehaviour
     private void Update()
     {
         if (checkChange != m_puzzle.TurnChange) ChangeState();
+
+        if (m_isSpikeOn)
+        {
+            var standing = Physics2D.OverlapBox(transform.position, new Vector2(0.2f, 0.2f), 0, 1 << 8);
+
+            if (standing != null && standing.CompareTag("Monster"))
+            {
+                Destroy(standing);
+            }
+        }
     }
 
     private void ChangeState()

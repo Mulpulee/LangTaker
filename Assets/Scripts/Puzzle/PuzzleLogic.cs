@@ -86,12 +86,6 @@ public class PuzzleLogic : MonoBehaviour
             {
                 Destroy(facing.gameObject);
             }
-
-            further = CheckTile(facing.transform, 9, Vector2.zero);
-            if (further != null && further.CompareTag("Spike"))
-            {
-                Destroy(facing.gameObject);
-            }
         }
         else if (facing.CompareTag("Key"))
         {
