@@ -14,6 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 3
   Illust: {fileID: 21300000, guid: d51818f3f9de838409783c2e8c9f16da, type: 3}
-  Description: "C#\uC785\uB2C8\uB2E4. \uC800\uB294 \uC9C0\uAE08 \uBCF8\uAC00 \uC81C\uBC29\uC5D0\uC11C
-    \uBD88\uCF1C\uACE0 \uCC45\uC0C1\uC5D0 \uC549\uC544 \uC774 \uAE00\uC744 \uC791\uC131\uC911\uC5D0
-    \uC788\uC2B5\uB2C8\uB2E4."
+  Description: "C# | \uC6D0\uCE59\uC8FC\uC758\uC790. \uADDC\uC728\uC744 \uC798 \uC9C0\uD0A4\uC790."

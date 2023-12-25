@@ -53,7 +53,7 @@ public class SpecialSpike : MonoBehaviour
 
             if (standing != null && standing.CompareTag("Monster"))
             {
-                Destroy(standing);
+                Destroy(standing.gameObject);
             }
         }
     }

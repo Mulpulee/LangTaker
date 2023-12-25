@@ -14,6 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 1
   Illust: {fileID: 21300000, guid: e2ef073a2ce7f2a4384f9c5ec29d853b, type: 3}
-  Description: "Python\uC785\uB2C8\uB2E4. \uC598\uAC00 \uAC70\uC758 \uAC00\uC7A5
-    \uBA3C\uC800 \uB098\uC628 \uCE90\uB514\uC8E0. \uADF8\uB9AC\uACE0 \uC81C \uCD5C\uC560\uC774\uAE30\uB3C4
-    \uD569\uB2C8\uB2E4."
+  Description: "Python | \uCC28\uAC00\uC6B4 \uAE30\uACC4\uC801 \uB9C8\uC74C\uC73C\uB85C
+    \uC0C1\uB300\uB97C \uD310\uBCC4\uD55C\uB2E4."
