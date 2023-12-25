@@ -279,7 +279,6 @@ GameObject:
   - component: {fileID: 259254016}
   - component: {fileID: 259254019}
   - component: {fileID: 259254018}
-  - component: {fileID: 259254020}
   m_Layer: 0
   m_Name: PuzzleManager
   m_TagString: Untagged
@@ -357,21 +356,6 @@ MonoBehaviour:
   Portal: {fileID: 1219990129490083459, guid: 9da155465f994894ebcb742030c369e0, type: 3}
   m_lua: {fileID: 259254018}
   m_logic: {fileID: 259254016}
---- !u!114 &259254020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259254015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95a9189d5d84df2428b4d3ed417a085b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  logic: {fileID: 259254016}
-  MapName: test
-  Lang: python
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

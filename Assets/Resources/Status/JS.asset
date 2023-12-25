@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 0
   Name: JavaScript
+  MapName: JS
   Illust: {fileID: 21300000, guid: 988180e146c2f2942b5ca4c43f76d614, type: 3}
   Description: "JavaScript | \uBC1D\uC544\uBCF4\uC774\uB824\uB294 \uC5BC\uAD74 \uC774\uBA74\uC5D4
     \uC6B0\uC6B8\uD55C \uAD6C\uC11D\uC774 \uC788\uB2E4."

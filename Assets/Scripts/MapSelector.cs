@@ -61,9 +61,11 @@ public class MapSelector : MonoBehaviour
 
         foreach (var s in m_mapButtons)
         {
+            s.gameObject.SetActive(true);
             s.sprite = m_mapButtonSprites[0];
             s.SetNativeSize();
         }
+        m_line.sizeDelta = new Vector2(1400, m_line.sizeDelta.y);
 
         for (int i = 2; i > m_currentLang.MapCount - 1; i--)
         {
@@ -89,9 +91,10 @@ public class MapSelector : MonoBehaviour
         m_description.text = m_currentLang.Description;
     }
 
-    private void ShowMapInfo(int pIndex)
+    public void ShowMapInfo(int pIndex)
     {
-        Map map = m_lua.GetMap($"{m_currentLang.Name}_{pIndex + 1}");
+        m_currentIndex = pIndex;
+        Map map = m_lua.GetMap($"{m_currentLang.MapName}_{pIndex + 1}");
 
         m_name.text = $"{m_currentLang.name} - {pIndex + 1}";
 
@@ -120,12 +123,8 @@ public class MapSelector : MonoBehaviour
         MapSelectWindow();
     }
 
-    public void SelectMap(int pIndex)
+    public void StartPuzzle()
     {
-        if (m_currentIndex != pIndex)
-        {
-            ShowMapInfo(pIndex); return;
-        }
-
+        GameManagerEx.Instance.StartPuzzle($"{m_currentLang.MapName}_{m_currentIndex + 1}", m_currentLang.Name);
     }
 }

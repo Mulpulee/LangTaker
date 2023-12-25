@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 7
   Name: Lua
+  MapName: LU
   Illust: {fileID: 21300000, guid: b6cf649fb5fa54a46ac1dc3a77815012, type: 3}
   Description: "Lua | \uC774\uAC83\uC774 \uC9C4\uC815\uD55C MZ! \uB180 \uB550 \uB180\uACE0
     \uC798 \uB550 \uC790\uC57C\uC9C0"

@@ -62,11 +62,24 @@ public class PuzzleLoader : MonoBehaviour
         SceneManagerEx.Instance.PlayLoading(true);
         m_mapName = pMap;
         m_lang = pLang;
-        Map map = m_lua.GetMap(pMap);
-        m_moveCount = (int)map.TurnCount;
 
+        StartCoroutine(LoadMap());
+    }
+
+    private IEnumerator LoadMap()
+    {
+        Map map = m_lua.GetMap(m_mapName);
+
+        yield return new WaitUntil(() => map != null);
+
+        MapLoaded(map);
+    }
+
+    private void MapLoaded(Map map)
+    {
         Pattern m_patterns = m_lua.GetPatterns();
 
+        m_moveCount = (int)map.TurnCount;
         int width = (int)map.Width;
         int height = (int)map.Height;
 
@@ -138,6 +151,18 @@ public class PuzzleLoader : MonoBehaviour
                         SummonTile(EmptyTile, i, j, width, height);
                         SummonTile(SpecialSpike, i, j, width, height, "special", m_patterns.Pattern1);
                         break;
+                    case '(':
+                        SummonTile(EmptyTile, i, j, width, height);
+                        SummonTile(SpecialSpike, i, j, width, height, "special", m_patterns.Pattern2);
+                        break;
+                    case '[':
+                        SummonTile(EmptyTile, i, j, width, height);
+                        SummonTile(SpecialSpike, i, j, width, height, "special", m_patterns.Pattern3);
+                        break;
+                    case '<':
+                        SummonTile(EmptyTile, i, j, width, height);
+                        SummonTile(SpecialSpike, i, j, width, height, "special", m_patterns.Pattern4);
+                        break;
 
 
                     default:
@@ -168,9 +193,9 @@ public class PuzzleLoader : MonoBehaviour
             Quaternion.identity, MapParent.transform);
 
         if (type == "nspike")
-            go.GetComponent<OnOffSpike>().Init(m_logic, true, m_sprites[m_lang]["spike"], m_sprites[m_lang]["offspike"]);
+            go.GetComponent<OnOffSpike>().Init(m_logic, true);// , m_sprites[m_lang]["spike"], m_sprites[m_lang]["offspike"]);
         else if (type == "fspike")
-            go.GetComponent<OnOffSpike>().Init(m_logic, false, m_sprites[m_lang]["spike"], m_sprites[m_lang]["offspike"]);
+            go.GetComponent<OnOffSpike>().Init(m_logic, false);// , m_sprites[m_lang]["spike"], m_sprites[m_lang]["offspike"]);
         else if (type == "special")
             go.GetComponent<SpecialSpike>().Init(m_logic, pattern);
         else if (type == "portal") { }

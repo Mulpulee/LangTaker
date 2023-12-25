@@ -7,6 +7,7 @@ public class StatusObject : ScriptableObject
 {
     public Lang Type;
     public string Name;
+    public string MapName;
     public Sprite Illust;
     public string Description;
     public int MapCount;

@@ -73,11 +73,11 @@ public class GameManagerEx : MonoBehaviour
 
     public void StartPuzzle(string pMap, string pLang)
     {
-        SceneManagerEx.Instance.LoadScene("PuzzleScene", () => PuzzleSceneLoaded());
+        SceneManagerEx.Instance.LoadScene("PuzzleScene", () => PuzzleSceneLoaded(pMap, pLang));
     }
 
-    private void PuzzleSceneLoaded()
+    private void PuzzleSceneLoaded(string pMap, string pLang)
     {
-
+        GameObject.FindObjectOfType<PuzzleLogic>().ResetMap(pMap, pLang);
     }
 }
