@@ -10,6 +10,7 @@ public interface Map
     uint Width { get; }
     uint Height { get; }
     string Puzzle { get; }
+    bool[] Obstacles { get; }
 }
 
 [CSharpCallLua]

@@ -15,6 +15,8 @@
 -- 부서지는 상자 : 1 ~ 9
 -- 포탈 : o
 
+-- 사용된 기믹 순서
+-- 상자, 몬스터, 가시, 열쇠, 한턴가시, 부서지는상자, 스페셜가시, 포탈
 
 test = {
     TurnCount = 22,
@@ -25,7 +27,9 @@ test = {
     "w12345678w" ..
     "wo.{.....w" ..
     "w9....o.pw" ..
-    "wwwwwwwwww"
+    "wwwwwwwwww",
+
+    Obstacles = {true, true, true, false, false, false, false, true}
 }
 
 SpecialPattern = {

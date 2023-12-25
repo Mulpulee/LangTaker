@@ -33,7 +33,7 @@ public class LangComponent : MonoBehaviour, ISelectHandler
 #if UNITY_EDITOR_WIN && UNITY_STANDALONE_WIN
     public void OnSelect(BaseEventData eventData)
     {
-        mapSelector.ShowInfo(lang);
+        mapSelector.ShowLangInfo(lang);
     }
 #endif
 }

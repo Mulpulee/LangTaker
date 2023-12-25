@@ -144,6 +144,35 @@ namespace XLua.CSObjectWrap
             
         }
         
+        bool[] Map.Obstacles 
+        {
+            
+            get 
+            {
+#if THREAD_SAFE || HOTFIX_ENABLE
+                lock (luaEnv.luaEnvLock)
+                {
+#endif
+					RealStatePtr L = luaEnv.L;
+					int oldTop = LuaAPI.lua_gettop(L);
+					ObjectTranslator translator = luaEnv.translator;
+					LuaAPI.lua_getref(L, luaReference);
+					LuaAPI.xlua_pushasciistring(L, "Obstacles");
+					if (0 != LuaAPI.xlua_pgettable(L, -2))
+					{
+						luaEnv.ThrowExceptionFromError(oldTop);
+					}
+					bool[] __gen_ret = (bool[])translator.GetObject(L, -1, typeof(bool[]));
+					LuaAPI.lua_pop(L, 2);
+					return __gen_ret;
+#if THREAD_SAFE || HOTFIX_ENABLE
+                }
+#endif
+            }
+            
+            
+        }
+        
         
         
 		

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: PY
   m_EditorClassIdentifier: 
   Type: 1
+  Name: Python
   Illust: {fileID: 21300000, guid: e2ef073a2ce7f2a4384f9c5ec29d853b, type: 3}
   Description: "Python | \uCC28\uAC00\uC6B4 \uAE30\uACC4\uC801 \uB9C8\uC74C\uC73C\uB85C
     \uC0C1\uB300\uB97C \uD310\uBCC4\uD55C\uB2E4."
+  MapCount: 3

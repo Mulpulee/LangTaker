@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: C
   m_EditorClassIdentifier: 
   Type: 5
+  Name: C
   Illust: {fileID: 21300000, guid: 4bade220f88bc79419d6eebadf0f6ae7, type: 3}
   Description: "C | \uC624\uB9CC\uD558\uACE0 \uC790\uAE30 \uC911\uC2EC\uC801. \uD765\uBBF8\uAC00
     \uC5C6\uC73C\uBA74 \uCCD0\uB2E4\uBCF4\uC9C0 \uC54A\uB294\uB2E4."
+  MapCount: 2
