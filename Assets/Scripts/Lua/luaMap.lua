@@ -32,6 +32,34 @@ test = {
     Obstacles = {true, true, true, false, false, false, false, true}
 }
 
+JavaScript_1 = {
+    TurnCount = 22,
+    Width = 10,
+    Height = 5,
+    Puzzle =
+    "wwwwwwwwww" ..
+    "w12345678w" ..
+    "wo.{.....w" ..
+    "w9....o.pw" ..
+    "wwwwwwwwww",
+
+    Obstacles = {true, true, true, false, false, false, false, true}
+}
+
+JavaScript_2 = {
+    TurnCount = 22,
+    Width = 10,
+    Height = 5,
+    Puzzle =
+    "wwwwwwwwww" ..
+    "w12345678w" ..
+    "wo.{.....w" ..
+    "w9....o.pw" ..
+    "wwwwwwwwww",
+
+    Obstacles = {false, true, true, false, false, true, false, false}
+}
+
 SpecialPattern = {
     Pattern1 = {true, true, true, false}
 }

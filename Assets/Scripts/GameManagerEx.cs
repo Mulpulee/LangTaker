@@ -66,7 +66,17 @@ public class GameManagerEx : MonoBehaviour
 
     }
 
-    public void LoadGame()
+    public void SelectMap()
+    {
+
+    }
+
+    public void StartPuzzle(string pMap, string pLang)
+    {
+        SceneManagerEx.Instance.LoadScene("PuzzleScene", () => PuzzleSceneLoaded());
+    }
+
+    private void PuzzleSceneLoaded()
     {
 
     }

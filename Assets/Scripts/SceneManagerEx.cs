@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class SceneManagerEx : MonoBehaviour
 {
@@ -79,15 +80,15 @@ public class SceneManagerEx : MonoBehaviour
         m_loading.SetActive(false);
     }
 
-    public void LoadScene(string pScene)
+    public void LoadScene(string pScene, Action pAction)
     {
         m_loading.SetActive(true);
         SceneManager.sceneLoaded += LoadSceneEnd;
         m_loadSceneName = pScene;
-        StartCoroutine(Load(pScene));
+        StartCoroutine(Load(pScene, pAction));
     }
 
-    private IEnumerator Load(string pScene)
+    private IEnumerator Load(string pScene, Action pAction)
     {
         AsyncOperation op = SceneManager.LoadSceneAsync(pScene);
         op.allowSceneActivation = false;
@@ -98,6 +99,7 @@ public class SceneManagerEx : MonoBehaviour
         yield return new WaitUntil(() => op.isDone);
 
         CloseLoading();
+        pAction.Invoke();
     }
 
     private void LoadSceneEnd(Scene pScene, LoadSceneMode pLoadSceneMode)

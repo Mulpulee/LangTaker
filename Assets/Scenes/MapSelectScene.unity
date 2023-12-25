@@ -409,12 +409,12 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 220
+  m_Spacing: 300
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
+  m_ChildScaleWidth: 1
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
 --- !u!1 &75631911
@@ -1208,7 +1208,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 276110930}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1871523341}
+        m_TargetAssemblyTypeName: MapSelector, Assembly-CSharp
+        m_MethodName: LangSelectWindow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &276110930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1815,7 +1827,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 560147144}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1871523341}
+        m_TargetAssemblyTypeName: MapSelector, Assembly-CSharp
+        m_MethodName: SelectMap
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &597755681
 GameObject:
   m_ObjectHideFlags: 0
@@ -1844,7 +1868,7 @@ RectTransform:
   m_GameObject: {fileID: 597755681}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.40000004, y: 0.40000004, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 68943515}
@@ -1936,7 +1960,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 597755683}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1871523341}
+        m_TargetAssemblyTypeName: MapSelector, Assembly-CSharp
+        m_MethodName: SelectMap
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &695058479
 GameObject:
   m_ObjectHideFlags: 0
@@ -2783,7 +2819,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1176127504
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3993,6 +4029,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1871523342}
   - component: {fileID: 1871523341}
+  - component: {fileID: 1871523343}
   m_Layer: 0
   m_Name: MapSelector
   m_TagString: Untagged
@@ -4013,8 +4050,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_status: {fileID: 924176827}
-  m_lang: {fileID: 0}
-  m_map: {fileID: 0}
+  m_lang: {fileID: 1176127503}
+  m_map: {fileID: 1684926510}
+  m_lua: {fileID: 1871523343}
+  m_mapButtonSprites:
+  - {fileID: 21300000, guid: 8e9c43ae197ab4d4d954907e7c95a932, type: 3}
+  - {fileID: 21300000, guid: 9e68f50a39c15524998278dac9ef7323, type: 3}
+  m_noneButton: {fileID: 252897134}
 --- !u!4 &1871523342
 Transform:
   m_ObjectHideFlags: 0
@@ -4030,6 +4072,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1871523343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871523340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 563dbb9f868a1f04eab975b72396edd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_luaScript: {fileID: 2213920135882650261, guid: 0928b3bf777dc5b49a66fbc8caec50f5, type: 3}
 --- !u!1 &1889590102
 GameObject:
   m_ObjectHideFlags: 0
@@ -4226,7 +4281,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1900847964}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1871523341}
+        m_TargetAssemblyTypeName: MapSelector, Assembly-CSharp
+        m_MethodName: SelectMap
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1903918454
 GameObject:
   m_ObjectHideFlags: 0
