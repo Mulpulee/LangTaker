@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,7 +34,7 @@ public class GameManagerEx : MonoBehaviour
             if (m_status == null)
             {
                 m_status = Instance.GetComponent<StatusManager>();
-                if (m_status == null) m_status = Instance.AddComponent<StatusManager>();
+                if (m_status == null) m_status = Instance.gameObject.AddComponent<StatusManager>();
             }
             return m_status;
         }
