@@ -130,7 +130,7 @@ public class PuzzleLoader : MonoBehaviour
                         break;
                     case 'g':
                         SummonTile(EmptyTile, i, j, width, height);
-                        SummonTile(Goal, i, j, width, height);
+                        SummonTile(Goal, i, j, width, height).AddComponent<GoalController>().Init(map.Dialog, m_lang, map.NextMap);
                         break;
                     case 'p':
                         SummonTile(EmptyTile, i, j, width, height);

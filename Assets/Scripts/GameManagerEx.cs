@@ -62,12 +62,13 @@ public class GameManagerEx : MonoBehaviour
 
     public void NewGame()
     {
-
+        // 인트로 재생 후 JS_1로 이동
+        SceneManagerEx.Instance.LoadSceneWithFade("DialogScene", true, () => DialogSceneLoaded("Intro"));
     }
 
     public void SelectMap()
     {
-
+        SceneManagerEx.Instance.LoadSceneWithFade("MapSelectScene", true);
     }
 
     public void StartPuzzle(string pMap, string pLang)
@@ -78,5 +79,42 @@ public class GameManagerEx : MonoBehaviour
     private void PuzzleSceneLoaded(string pMap, string pLang)
     {
         GameObject.FindObjectOfType<PuzzleLogic>().ResetMap(pMap, pLang);
+    }
+
+    public void PuzzleCleared(string pDialog, bool pNoDialog = false, string pLang = null)
+    {
+        if (pNoDialog)
+            StartPuzzle(pDialog, pLang);
+        else
+            SceneManagerEx.Instance.LoadSceneWithFade("DialogScene", true, () => DialogSceneLoaded(pDialog));
+    }
+
+    public void DialogSceneLoaded(string pDialog)
+    {
+        DialogueManager.Instance.RunDialog(pDialog);
+    }
+
+    public void DialogEnded(string pLang, float pProgress, string pNextMap)
+    {
+        StatusObject status = Status.GetStatus(pLang);
+        Status.SetProgress(status.Type, status.Progress < pProgress ? pProgress : status.Progress);
+
+        if (pNextMap != "end")
+        {
+            SceneManagerEx.Instance.LoadScene("PuzzleScene", () => PuzzleSceneLoaded(pNextMap, pLang));
+        }
+        else
+        {
+            SceneManagerEx.Instance.LoadScene("MapSelectScene");
+        }
+    }
+
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

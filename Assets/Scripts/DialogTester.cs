@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class DialogTester : MonoBehaviour
 {
+    [SerializeField] private string m_script;
+
     private void Start()
     {
-        DialogueManager.Instance.RunDialog("JS_1");
+        DialogueManager.Instance.RunDialog(m_script);
     }
 }

@@ -1,30 +1,29 @@
 JS_1 = CreateDialog(function()
 
-    Talk("JavaScript", "우와, 안녕~?! 여긴 무슨 일이야~?", "JS_Normal")
-    Talk("JavaScript", "처음 보는 언어인 거 같은데~", "JS_Normal")
-    
-    local select = MakeSelect("JavaScript", "처음 보는 언어인 거 같은데~", "JS_Normal",
+    Talk("JavaScript", "우왁! 뭐야!", "JS_Normal")
+    Talk("JavaScript", "...", "JS_Normal")
+    Talk("JavaScript", "아, 아하하... 안녕~ 넌 누구야?", "JS_Normal")
+
+    local select = MakeSelect("JavaScript", "아, 아하하... 안녕~ 넌 누구야?", "JS_Normal",
     {
-        "난 사람인데.",
-        "지금부터 너를 데려갈거야."
+        "나는 나지.",
+        "난 이 컴퓨터의 주인이야."
     })
-    Talk("JavaScript", "아하하~ 농담인가? 재밌다.", "JS_Normal")
-    
-    Talk("JavaScript", "하나 물어볼래. 여기 밖으로 나가면 날 봐 줄 사람이 있을까?", "JS_Normal")
-    Talk("JavaScript", "솔직히 난 확신이 잘 안 서는데...", "JS_Normal")
-    local select = MakeSelect("JavaScript", "솔직히 난 확신이 잘 안 서는데...", "JS_Normal",
+    Talk("JavaScript", "그게 뭐야~ 너 웃긴다?", "JS_Normal")
+    Talk("JavaScript", "난 JS라고 해! 이 미로에서 줄곧 널 지켜봤지.", "JS_Normal")
+    Talk("JavaScript", "이렇게 단숨에 도달할 줄 몰랐는데?", "JS_Normal")
+
+    local select = MakeSelect("JavaScript", "이렇게 단숨에 도달할 줄 몰랐는데?", "JS_Normal",
     {
-        "없을 걸.",
-        "그럼, 물론이지"
+        "아무렴.",
+        "죽여주지?"
     })
     
-    if select == 0 then
-        Talk("JavaScript", "그렇지? 아하하...", "JS_Normal")
-        Talk("JavaScript", "그럼 하나 부탁하고 싶은 게 있어.", "JS_Normal")
-        Talk("JavaScript", "네가 날 봐 줘!", "JS_Normal")
-    elseif select == 1 then
-        Talk("JavaScript", "... ...", "JS_Normal")
-        Talk("JavaScript", "거짓말인거 다 알아!", "JS_Normal")
-    end
+    Talk("JavaScript", "아하하~ 그래~", "JS_Normal")
+    Talk("JavaScript", "오랜만에 외부인이라 나도 심술 좀 부려볼까?", "JS_Normal")
+    Talk("JavaScript", "다음 미로에서도 날 따라잡으면, 내가 생각해볼게!", "JS_Normal")
+    Talk("JavaScript", "어디 한 번 힘내봐!", "JS_Normal")
+
+    EndDialog(false, nil, "JavaScript", 0.5, "JS_2")
 
 end)

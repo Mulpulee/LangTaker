@@ -10,4 +10,5 @@ Intro = CreateDialog(function()
     Talk("", "어쩌면 저들이 이 미로의 해답을 알고 있을지도 모르지.", "None")
     Talk("", "어찌 됐건... 힘내라!", "None")
 
+    EndDialog(false, nil, "JavaScript", 0, "JS_1")
 end)

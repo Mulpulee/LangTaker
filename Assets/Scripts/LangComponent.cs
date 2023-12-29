@@ -30,10 +30,10 @@ public class LangComponent : MonoBehaviour, ISelectHandler
         button.onClick.AddListener(() => mapSelector.SelectLang(lang));
     }
 
-#if UNITY_EDITOR_WIN && UNITY_STANDALONE_WIN
     public void OnSelect(BaseEventData eventData)
     {
+#if UNITY_EDITOR_WIN && UNITY_STANDALONE_WIN
         mapSelector.ShowLangInfo(lang);
-    }
 #endif
+    }
 }

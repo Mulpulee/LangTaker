@@ -78,6 +78,29 @@ namespace DialogueSystem
         }
     }
 
+    public class DialogueEndLine : IDialogueLine
+    {
+        private bool m_result;
+        private string m_text;
+        private string m_lang;
+        private float m_progress;
+        private string m_nextMap;
+
+        public DialogueEndLine(bool pResult, string pText, string pLang, float pProgress, string pNextMap)
+        {
+            m_result = pResult;
+            m_text = pText;
+            m_lang = pLang;
+            m_progress = pProgress;
+            m_nextMap = pNextMap;
+        }
+
+        public void OnExecute(DialogueMachine pMachine)
+        {
+            pMachine.Output.EndPrint(m_result, m_text, m_lang, m_progress, m_nextMap);
+        }
+    }
+
     public interface IDialogueOutput
     {
         void WriteLine(String pLine);
@@ -87,7 +110,7 @@ namespace DialogueSystem
 
         void BeginPrint();
         void DoPrint(Action pNext);
-        void EndPrint();
+        void EndPrint(bool pSucceed = true, string pText = null, string pLang = null, float pProgress = 0, string pNextMap = null);
     }
 
     public interface IDialogueInput

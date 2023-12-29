@@ -38,7 +38,10 @@ JS_1 = {
     "0w.b.w0" ..
     "00www00" ,
 
-    Obstacles = {true, false, false, false, false, false, false, false}
+    Obstacles = {true, false, false, false, false, false, false, false},
+
+    Dialog = "JS_1",
+    NextMap = "JS_2"
 }
 
 JS_2 = {
@@ -55,7 +58,10 @@ JS_2 = {
     "00wb..w00" ..
     "000www000",
 
-    Obstacles = {true, false, false, false, false, false, false, false}
+    Obstacles = {true, false, false, false, false, false, false, false},
+
+    Dialog = "JS_2",
+    NextMap = ""
 }
 
 PY_1 = {
@@ -71,7 +77,10 @@ PY_1 = {
     "0wmm.w0" ..
     "00www00",
 
-    Obstacles = {true, true, false, false, false, false, false, false}
+    Obstacles = {true, true, false, false, false, false, false, false},
+
+    Dialog = "PY_1",
+    NextMap = "PY_2"
 }
 
 PY_2 = {
@@ -87,7 +96,10 @@ PY_2 = {
     "0w.n.w0" ..
     "00www00",
 
-    Obstacles = {true, true, true, false, false, false, false, false}
+    Obstacles = {true, true, true, false, false, false, false, false},
+
+    Dialog = "PY_2",
+    NextMap = "PY_3"
 }
 
 PY_3 = {
@@ -105,7 +117,10 @@ PY_3 = {
     "0w.....w0" ..
     "00wwwww00" ,
 
-    Obstacles = {true, true, true, false, false, false, false, false}
+    Obstacles = {true, true, true, false, false, false, false, false},
+
+    Dialog = "PY_3",
+    NextMap = ""
 }
 
 JA_1 = {
@@ -123,7 +138,10 @@ JA_1 = {
     "w..mgm..w" ..
     "0wwwwwww0" ,
 
-    Obstacles = {true, true, true, true, false, false, false, false}
+    Obstacles = {true, true, true, true, false, false, false, false},
+
+    Dialog = "JA_1",
+    NextMap = ""
 }
 
 CS_1 = {
@@ -139,7 +157,10 @@ CS_1 = {
     "wAvAvvw" ..
     "wwwwwww" ,
 
-    Obstacles = {true, false, false, false, true, false, false, false}
+    Obstacles = {true, false, false, false, true, false, false, false},
+
+    Dialog = "CS_1",
+    NextMap = "CS_2"
 }
 
 CS_2 = {
@@ -155,7 +176,10 @@ CS_2 = {
     "w.sn.gw" ..
     "wwwwwww" ,
 
-    Obstacles = {true, true, true, false, true, false, false, false}
+    Obstacles = {true, true, true, false, true, false, false, false},
+
+    Dialog = "CS_2",
+    NextMap = ""
 }
 
 CP_1 = {
@@ -169,7 +193,10 @@ CP_1 = {
     "w..gw" ..
     "wwwww" ,
 
-    Obstacles = {true, false, false, false, false, true, false, false}
+    Obstacles = {true, false, false, false, false, true, false, false},
+
+    Dialog = "CP_1",
+    NextMap = "CP_2"
 }
 
 CP_2 = {
@@ -183,7 +210,10 @@ CP_2 = {
     "w.4k..bgw" ..
     "wwwwwwwww" ,
 
-    Obstacles = {true, true, false, true, true, true, false, false}
+    Obstacles = {true, true, false, true, true, true, false, false},
+
+    Dialog = "",
+    NextMap = "CP_3"
 }
 
 CP_3 = {
@@ -197,7 +227,10 @@ CP_3 = {
     "w..4v6.3.7.gw" ..
     "wwwwwwwwwwwww" ,
 
-    Obstacles = {false, false, false, false, true, true, false, false}
+    Obstacles = {false, false, false, false, true, true, false, false},
+
+    Dialog = "CP_3",
+    NextMap = ""
 }
 
 C_1 = {
@@ -213,7 +246,10 @@ C_1 = {
     "w.{...w" ..
     "wwwwwww" ,
 
-    Obstacles = {false, false, false, false, false, false, true, false}
+    Obstacles = {false, false, false, false, false, false, true, false},
+
+    Dialog = "C_1",
+    NextMap = "C_2"
 }
 
 
@@ -232,7 +268,10 @@ C_2 = {
     "w......gw" ..
     "wwwwwwwww" ,
 
-    Obstacles = {true, true, false, false, false, false, true, false}
+    Obstacles = {true, true, false, false, false, false, true, false},
+
+    Dialog = "C_2",
+    NextMap = ""
 }
 
 RU_1 = {
@@ -248,7 +287,10 @@ RU_1 = {
     "ww.ogww" ..
     "0wwwww0" ,
 
-    Obstacles = {false, false, false, false, false, false, false, true}
+    Obstacles = {false, false, false, false, false, false, false, true},
+
+    Dialog = "",
+    NextMap = "RU_2"
 }
 
 RU_2 = {
@@ -264,7 +306,10 @@ RU_2 = {
     "ww..gww" ..
     "0wwwww0" ,
 
-    Obstacles = {true, true, false, false, false, false, false, true}
+    Obstacles = {true, true, false, false, false, false, false, true},
+
+    Dialog = "RU_1",
+    NextMap = ""
 }
 
 LU_1 = {
@@ -283,7 +328,10 @@ LU_1 = {
     "0ww...gww0" ..
     "000wwww000" ,
 
-    Obstacles = {false, false, false, false, false, false, false, false}
+    Obstacles = {false, false, false, false, false, false, false, false},
+
+    Dialog = "LU_1",
+    NextMap = ""
 }
 
 

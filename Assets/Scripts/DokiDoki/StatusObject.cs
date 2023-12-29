@@ -12,5 +12,5 @@ public class StatusObject : ScriptableObject
     public string Description;
     public int MapCount;
 
-    public int Progress { get; set; }
+    public float Progress { get; set; }
 }

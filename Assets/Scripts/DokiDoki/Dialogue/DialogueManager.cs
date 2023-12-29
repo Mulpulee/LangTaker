@@ -40,13 +40,13 @@ public class DialogueManager : MonoBehaviour
         FindDialogueUI();
 
         TextAsset dialogueCommon = Resources.Load<TextAsset>("Dialogue_common");
-        Debug.Log(dialogueCommon);
+        //Debug.Log(dialogueCommon);
         m_dialogueLuaEnv.DoString(dialogueCommon.text);
 
         TextAsset[] scripts = Resources.LoadAll<TextAsset>("Dialogues");
         foreach (var script in scripts)
         {
-            Debug.Log(script);
+            //Debug.Log(script);
             m_dialogueLuaEnv.DoString(script.text);
         }
     }

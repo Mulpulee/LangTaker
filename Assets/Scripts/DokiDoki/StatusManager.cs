@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StatusManager : MonoBehaviour
@@ -16,12 +17,17 @@ public class StatusManager : MonoBehaviour
         }
     }
 
+    public StatusObject GetStatus(string pLang)
+    {
+        return GetStatus(Status.FirstOrDefault(s => s.Value.Name == pLang).Value.Type);
+    }
+
     public StatusObject GetStatus(Lang pType)
     {
         return Status[pType];
     }
 
-    public void SetProgress(Lang pType, int pValue)
+    public void SetProgress(Lang pType, float pValue)
     {
         Status[pType].Progress = pValue; return;
     }

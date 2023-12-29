@@ -6,6 +6,7 @@ using System.IO;
 
 public class LuaMenuItem : MonoBehaviour
 {
+#if UNITY_EDITOR
     [MenuItem("Assets/Create/Lua Script")]
     private static void CrteateLuaScript()
     {
@@ -22,4 +23,5 @@ public class LuaMenuItem : MonoBehaviour
 
         AssetDatabase.Refresh();
     }
+#endif
 }

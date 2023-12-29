@@ -26,7 +26,7 @@ public class SceneManagerEx : MonoBehaviour
         }
     }
 
-    private GameObject m_loadingPrefab;
+    private GameObject m_fadeImage;
     private GameObject m_loading;
     private string m_loadSceneName;
 
@@ -43,8 +43,9 @@ public class SceneManagerEx : MonoBehaviour
             Destroy(gameObject);
         }
 
-        m_loadingPrefab = Resources.Load<GameObject>("Loading");
-        m_loading = Instantiate(m_loadingPrefab, transform);
+        m_fadeImage = Instantiate(Resources.Load<GameObject>("Fade"), transform);
+        m_loading = Instantiate(Resources.Load<GameObject>("Loading"), transform);
+        m_fadeImage.SetActive(false);
         m_loading.SetActive(false);
     }
 
@@ -80,7 +81,41 @@ public class SceneManagerEx : MonoBehaviour
         m_loading.SetActive(false);
     }
 
-    public void LoadScene(string pScene, Action pAction)
+    public void LoadSceneWithFade(string pScene, bool pOnlyfade = false, Action pAction = null)
+    {
+        if (pOnlyfade)
+        {
+            StartCoroutine(FadeOut(pAction, pScene));
+        }
+        else
+        {
+            StartCoroutine(FadeOut(() => LoadScene(pScene, pAction)));
+        }
+    }
+
+    public IEnumerator FadeOut(Action pAction, string pScene = null)
+    {
+        m_fadeImage.SetActive(true);
+        Image image = m_fadeImage.transform.GetChild(0).GetComponent<Image>();
+        while (image.color.a < 1)
+        {
+            yield return new WaitForSeconds(0.01f);
+            image.color += new Color(0, 0, 0, 0.01f);
+        }
+
+        image.color = Color.black;
+        if (pScene != null)
+        {
+            AsyncOperation async = SceneManager.LoadSceneAsync(pScene);
+            yield return new WaitUntil(() => async.isDone);
+        }
+        image.color = new Color(0, 0, 0, 0);
+        m_fadeImage.SetActive(false);
+
+        if (pAction != null) pAction.Invoke();
+    }
+
+    public void LoadScene(string pScene, Action pAction = null)
     {
         m_loading.SetActive(true);
         SceneManager.sceneLoaded += LoadSceneEnd;
@@ -99,7 +134,7 @@ public class SceneManagerEx : MonoBehaviour
         yield return new WaitUntil(() => op.isDone);
 
         CloseLoading();
-        pAction.Invoke();
+        if(pAction != null) pAction.Invoke();
     }
 
     private void LoadSceneEnd(Scene pScene, LoadSceneMode pLoadSceneMode)

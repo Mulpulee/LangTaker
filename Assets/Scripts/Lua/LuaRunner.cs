@@ -11,6 +11,9 @@ public interface Map
     uint Height { get; }
     string Puzzle { get; }
     bool[] Obstacles { get; }
+
+    string Dialog { get; }
+    string NextMap { get; }
 }
 
 [CSharpCallLua]

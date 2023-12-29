@@ -16,6 +16,11 @@ public class DialogueUI : MonoBehaviour, IDialogueInput, IDialogueOutput
     [SerializeField] private Image m_selectShade;
     [SerializeField] private TextButton[] m_selectionButtons;
 
+    [SerializeField] private GameObject m_gameoverCanvas;
+    [SerializeField] private GameObject m_successCanvas;
+    [SerializeField] private Text m_gameoverText;
+    [SerializeField] private Text m_successText;
+
     private CanvasGroup m_canvasGroup;
 
     private String m_talkLine;
@@ -41,11 +46,6 @@ public class DialogueUI : MonoBehaviour, IDialogueInput, IDialogueOutput
         {
             m_illusts.Add(s.name, s);
         }
-    }
-
-    private void Start()
-    {
-        DialogueManager.Instance.RunDialog("JS_1");
     }
 
     public int ReadSelection()
@@ -87,9 +87,40 @@ public class DialogueUI : MonoBehaviour, IDialogueInput, IDialogueOutput
         m_printRoutine = StartCoroutine(PrintRoutine(pNext));
     }
 
-    public void EndPrint()
+    public void EndPrint(bool pSucceed, string pText, string pLang, float pProgress, string pNextMap)
     {
+        if (pText != null)
+        {
+            m_canvasGroup.Hide();
+            if (pSucceed)
+            {
+                m_successText.text = pText;
+                m_successCanvas.SetActive(true);
+            }
+            else
+            {
+                m_gameoverText.text = pText;
+                m_gameoverCanvas.SetActive(true);
+            }
+        }
+
+        m_isPrinting = true;
+        StartCoroutine(EndDialogRoutine(() => GameManagerEx.Instance.DialogEnded(pLang, pProgress, pNextMap)));
+    }
+
+    private IEnumerator EndDialogRoutine(Action pNext)
+    {
+        yield return new WaitUntil(() => !m_isPrinting);
         m_canvasGroup.Hide();
+
+        StartCoroutine(SceneManagerEx.Instance.FadeOut(() => HideCanvas(pNext)));
+    }
+
+    private void HideCanvas(Action pNext)
+    {
+        m_gameoverCanvas.SetActive(false);
+        m_successCanvas.SetActive(false);
+        pNext.Invoke();
     }
 
     private void HideAllButtons()
@@ -135,6 +166,7 @@ public class DialogueUI : MonoBehaviour, IDialogueInput, IDialogueOutput
                 if(!m_isPrinting)
                 {
                     m_talkLineText.text = m_talkLine;
+                    yield return new WaitForSeconds(0.1f);
                     break;
                 }
             }
